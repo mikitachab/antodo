@@ -1,8 +1,8 @@
 __version__ = "0.1.0"
-__all__ = ["hello"]
+__all__ = ["main"]
 
-from .hello import hello
+from .todo_cli import todo_cli
 
 
 def main():
-    hello()
+    todo_cli()
