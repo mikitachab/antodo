@@ -1,4 +1,5 @@
 import contextlib
+from typing import List
 
 import click
 
@@ -26,7 +27,7 @@ def add(content: str, urgent: bool):
 
 @todo_cli.command()
 @click.argument("indexes", nargs=-1, type=click.INT)
-def remove(indexes: int):
+def remove(indexes: List[int]):
     with todos_operation() as todos:
         for index in indexes:
             index_to_remove = index - 1

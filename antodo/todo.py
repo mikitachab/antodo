@@ -23,8 +23,8 @@ class Todos:
         self._todos: list = self._load_todos()
 
     def _load_todos(self) -> List[Todo]:
-        todos = self._get_or_create_todos()
-        todos = list(map(lambda todo: Todo(**todo), todos["todos"]))
+        todos_json = self._get_or_create_todos()
+        todos = list(map(lambda todo: Todo(**todo), todos_json["todos"]))
         return todos
 
     def _get_or_create_todos(self) -> dict:
@@ -59,3 +59,6 @@ class Todos:
 
     def __len__(self):
         return len(self._todos)
+
+    def __iter__(self):
+        return iter(self._todos)
