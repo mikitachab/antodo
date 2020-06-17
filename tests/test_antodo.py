@@ -49,3 +49,16 @@ def test_remove_todo(todo_invoke, add_todo):
     assert result.exit_code == 0
     assert "1. some task" not in result.output
     assert "1. second task" in result.output
+
+
+def test_remove_all(todo_invoke, add_todo):
+    add_todo("todo")
+    add_todo("another tood")
+
+    result = todo_invoke(["remove", "1", "2"])
+
+    assert result.exit_code == 0
+
+    show_result = todo_invoke(["show"])
+
+    assert "No todos found" in show_result.output

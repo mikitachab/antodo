@@ -29,13 +29,16 @@ def add(content: str, urgent: bool):
 @click.argument("indexes", nargs=-1, type=click.INT)
 def remove(indexes: List[int]):
     with todos_operation() as todos:
+        indexes_to_remove = []
         for index in indexes:
             index_to_remove = index - 1
             if index_to_remove < len(todos):
-                todos.remove_todo(index - 1)
-                click.echo(f"removed {index_to_remove}")
+                indexes_to_remove.append(index_to_remove)
             else:
                 click.echo(f"no todo with index {index}")
+
+        todos.remove_todos(indexes_to_remove)
+        click.echo(f"deletd todos: {indexes_to_remove}")
 
 
 @contextlib.contextmanager

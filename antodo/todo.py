@@ -47,8 +47,8 @@ class Todos:
         self._todos.append(Todo(content, urgent))
         self.save()
 
-    def remove_todo(self, index):
-        self._todos.pop(index)
+    def remove_todos(self, indexes_to_remove):
+        self._todos = [todo for index, todo in enumerate(self._todos) if index not in indexes_to_remove]
         self.save()
 
     def __getitem__(self, index):
