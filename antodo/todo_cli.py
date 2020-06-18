@@ -18,11 +18,12 @@ def show():
 
 
 @todo_cli.command()
-@click.argument("content", type=click.STRING)
+@click.argument("content", nargs=-1, type=click.STRING)
 @click.option("--urgent", "-u", is_flag=True)
-def add(content: str, urgent: bool):
+def add(content: List[str], urgent: bool):
+    content_str: str = " ".join(content)
     with todos_operation() as todos:
-        todos.add_todo(content, urgent)
+        todos.add_todo(content_str, urgent)
 
 
 @todo_cli.command()
