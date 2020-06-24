@@ -62,3 +62,14 @@ def test_remove_all(todo_invoke, add_todo):
     show_result = todo_invoke(["show"])
 
     assert "No todos found" in show_result.output
+
+
+def test_remove_todos(todo_invoke, add_todo):
+    add_todo("todo 1")
+    add_todo("todo 2")
+    add_todo("todo 3")
+
+    result = todo_invoke(["remove", "1", "3"])
+
+    assert "deleted todos: [1, 3]" in result.output
+    assert "1. todo 2" in result.output

@@ -39,7 +39,7 @@ def remove(indexes: List[int]):
                 click.echo(f"no todo with index {index}")
 
         todos.remove_todos(indexes_to_remove)
-        click.echo(f"deletd todos: {indexes_to_remove}")
+        click.echo(f"deleted todos: {[i+1 for i in indexes_to_remove]}")
 
 
 @contextlib.contextmanager
