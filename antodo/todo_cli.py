@@ -11,22 +11,22 @@ def todo_cli():
     pass
 
 
-@todo_cli.command()
+@todo_cli.command(help="show current todos")
 def show():
     todos = Todos()
     print_todos(todos)
 
 
-@todo_cli.command()
+@todo_cli.command(help="add todo")
 @click.argument("content", nargs=-1, type=click.STRING)
-@click.option("--urgent", "-u", is_flag=True)
+@click.option("--urgent", "-u", is_flag=True, help="set todo as urgent")
 def add(content: List[str], urgent: bool):
     content_str: str = " ".join(content)
     with todos_operation() as todos:
         todos.add_todo(content_str, urgent)
 
 
-@todo_cli.command()
+@todo_cli.command(help="removes todo")
 @click.argument("indexes", nargs=-1, type=click.INT)
 def remove(indexes: List[int]):
     with todos_operation() as todos:

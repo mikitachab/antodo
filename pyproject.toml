@@ -1,8 +1,17 @@
 [tool.poetry]
 name = "antodo"
-version = "0.2.1"
-description = ""
+version = "0.2.2"
+description = "another todo app"
 authors = ["Chabatarovich Mikita <mikita.chabatarovich@gmail.com>"]
+classifiers = [
+	"Development Status :: 2 - Pre-Alpha",
+	"Environment :: Console",
+	"License :: OSI Approved :: MIT License",
+	"Natural Language :: English",
+	"Operating System :: POSIX :: Linux",
+	"Programming Language :: Python :: 3.7",
+	"Topic :: Utilities",
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
