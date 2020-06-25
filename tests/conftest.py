@@ -38,5 +38,13 @@ def add_todo(todos_json_path):
 
     def _add_todo(content, urgent=False):
         todos.add_todo(content, urgent)
+        todos.save()
 
     return _add_todo
+
+
+@pytest.fixture
+def get_todos(todos_json_path):
+    def _make_todos():
+        return Todos()
+    return _make_todos

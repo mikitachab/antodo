@@ -23,10 +23,11 @@ class Todos:
 
     def add_todo(self, content: str, urgent: bool):
         self._todos.append(Todo(content, urgent))
-        self._loader.save_todos(self._todos)
 
     def remove_todos(self, indexes_to_remove):
         self._todos = [todo for index, todo in enumerate(self._todos) if index not in indexes_to_remove]
+
+    def save(self):
         self._loader.save_todos(self._todos)
 
     def __getitem__(self, index):

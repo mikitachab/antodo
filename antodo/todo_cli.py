@@ -42,10 +42,20 @@ def remove(indexes: List[int]):
         click.echo(f"deleted todos: {[i+1 for i in indexes_to_remove]}")
 
 
+@todo_cli.command(help="set todo as urgent")
+@click.argument("indexes", nargs=-1, type=click.INT)
+def urgent(indexes: List[int]):
+    with todos_operation() as todos:
+        indexes_to_set = [i-1 for i in indexes if i-1 < len(todos)]
+        for index in indexes_to_set:
+            todos[index].urgent = True
+
+
 @contextlib.contextmanager
 def todos_operation():
     todos = Todos()
     yield todos
+    todos.save()
     print_todos(todos)
 
 

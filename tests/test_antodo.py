@@ -2,7 +2,7 @@ from antodo import __version__
 
 
 def test_version():
-    assert __version__ == "0.2.1"
+    assert __version__ == "0.3.0"
 
 
 def test_list_empty_todos(todo_invoke):
@@ -73,3 +73,27 @@ def test_remove_todos(todo_invoke, add_todo):
 
     assert "deleted todos: [1, 3]" in result.output
     assert "1. todo 2" in result.output
+
+
+def test_add_todo_as_urgent(todo_invoke, get_todos):
+    todo_invoke(["add", "-u", "some task"])
+    todo_invoke(["add", "another task"])
+
+    todos = get_todos()
+
+    assert todos[0].urgent is True
+    assert todos[1].urgent is False
+
+
+def test_set_todos_as_urgent(todo_invoke, add_todo, get_todos):
+    add_todo("todo 1")
+    add_todo("todo 2")
+    add_todo("todo 3")
+
+    result = todo_invoke(["urgent", "1", "3"])
+    todos = get_todos()
+
+    assert result.exit_code == 0
+    assert todos[0].urgent is True
+    assert todos[1].urgent is False
+    assert todos[2].urgent is True
