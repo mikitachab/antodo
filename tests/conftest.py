@@ -47,4 +47,5 @@ def add_todo(todos_json_path):
 def get_todos(todos_json_path):
     def _make_todos():
         return Todos()
+
     return _make_todos

@@ -46,7 +46,7 @@ def remove(indexes: List[int]):
 @click.argument("indexes", nargs=-1, type=click.INT)
 def urgent(indexes: List[int]):
     with todos_operation() as todos:
-        indexes_to_set = [i-1 for i in indexes if i-1 < len(todos)]
+        indexes_to_set = [i - 1 for i in indexes if i - 1 < len(todos)]
         for index in indexes_to_set:
             todos[index].urgent = True
 
