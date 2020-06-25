@@ -8,7 +8,7 @@ from .todo import Todos
 
 @click.group()
 def todo_cli():
-    pass
+    """simple another todo CLI app"""
 
 
 @todo_cli.command(help="show current todos")
