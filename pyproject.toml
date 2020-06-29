@@ -13,6 +13,7 @@ classifiers = [
 	"Topic :: Utilities",
 ]
 readme = "README.md"
+homepage = "https://github.com/mikitachab/antodo"
 
 [tool.poetry.dependencies]
 python = "^3.7"
