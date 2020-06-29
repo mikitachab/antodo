@@ -193,6 +193,14 @@ python-versions = "*"
 version = "2020.6.8"
 
 [[package]]
+category = "main"
+description = "A safer file opener"
+name = "safer"
+optional = false
+python-versions = "*"
+version = "4.1.1"
+
+[[package]]
 category = "dev"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
@@ -286,7 +294,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "9482af663cd3fcb69326018c09e0037b67eb93ba665161683aca53ae7e420946"
+content-hash = "8822acd9009ec51ec7302c48abacba235e88e06385740c19923f678f47fd08b6"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -375,6 +383,10 @@ regex = [
     {file = "regex-2020.6.8-cp38-cp38-win32.whl", hash = "sha256:97712e0d0af05febd8ab63d2ef0ab2d0cd9deddf4476f7aa153f76feef4b2754"},
     {file = "regex-2020.6.8-cp38-cp38-win_amd64.whl", hash = "sha256:6ad8663c17db4c5ef438141f99e291c4d4edfeaacc0ce28b5bba2b0bf273d9b5"},
     {file = "regex-2020.6.8.tar.gz", hash = "sha256:e9b64e609d37438f7d6e68c2546d2cb8062f3adb27e6336bc129b51be20773ac"},
+]
+safer = [
+    {file = "safer-4.1.1-py3-none-any.whl", hash = "sha256:a717f970f68830ef90f506a57948090fe357eaa1a2c54afa61473c5ac4f7de8a"},
+    {file = "safer-4.1.1.tar.gz", hash = "sha256:934e61c95ccb07f287f6336121e804e4c81c53067bcd2c34b0b460a15a031bc2"},
 ]
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},

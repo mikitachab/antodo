@@ -4,6 +4,8 @@ import os
 import json
 from typing import List
 
+import safer
+
 import antodo.config as c
 
 
@@ -57,12 +59,12 @@ class TodosLoader:
                 return json.load(file)
 
         os.makedirs(c.TODOS_DIR, exist_ok=True)
-        with open(c.TODOS_JSON_PATH, "w") as file:
+        with safer.open(c.TODOS_JSON_PATH, "w") as file:
             json.dump(self.DEFAULT_TODOS, file)
 
         return self.DEFAULT_TODOS
 
     def save_todos(self, todos: Todos):
         todos_to_save = list(map(lambda todo: asdict(todo), todos))
-        with open(c.TODOS_JSON_PATH, "w") as file:
+        with safer.open(c.TODOS_JSON_PATH, "w") as file:
             json.dump({"todos": todos_to_save}, file)

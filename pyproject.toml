@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "antodo"
-version = "0.3.1"
+version = "0.3.2"
 description = "another todo app"
 authors = ["Chabatarovich Mikita <mikita.chabatarovich@gmail.com>"]
 classifiers = [
@@ -17,6 +17,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.7"
 click = "^7.1.2"
+safer = "^4.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
