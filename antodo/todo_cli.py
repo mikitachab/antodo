@@ -22,6 +22,8 @@ def show():
 @click.option("--urgent", "-u", is_flag=True, help="set todo as urgent")
 def add(content: List[str], urgent: bool):
     content_str: str = " ".join(content)
+    if not content_str:
+        raise click.BadArgumentUsage("cant add empty todo")
     with todos_operation() as todos:
         todos.add_todo(content_str, urgent)
 

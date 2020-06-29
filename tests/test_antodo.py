@@ -2,7 +2,7 @@ from antodo import __version__
 
 
 def test_version():
-    assert __version__ == "0.3.0"
+    assert __version__ == "0.3.1"
 
 
 def test_list_empty_todos(todo_invoke):
@@ -97,3 +97,10 @@ def test_set_todos_as_urgent(todo_invoke, add_todo, get_todos):
     assert todos[0].urgent is True
     assert todos[1].urgent is False
     assert todos[2].urgent is True
+
+
+def test_cant_add_empty_todo(todo_invoke):
+    result = todo_invoke(["add"])
+
+    assert result.exit_code == 2
+    assert "cant add empty todo" in result.output
