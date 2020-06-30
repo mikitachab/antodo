@@ -4,9 +4,11 @@ from typing import List
 import click
 
 from .todo import Todos
+from . import __version__
 
 
 @click.group()
+@click.version_option(__version__, "--version", "-v")
 def todo_cli():
     """simple another todo CLI app"""
 
