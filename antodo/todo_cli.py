@@ -3,7 +3,7 @@ from typing import List
 
 import click
 
-from .todo import Todos
+from antodo.todo import Todos
 from . import __version__
 
 
@@ -34,25 +34,27 @@ def add(content: List[str], urgent: bool):
 @click.argument("indexes", nargs=-1, type=click.INT)
 def remove(indexes: List[int]):
     with todos_operation() as todos:
-        indexes_to_remove = []
-        for index in indexes:
-            index_to_remove = index - 1
-            if index_to_remove < len(todos):
-                indexes_to_remove.append(index_to_remove)
-            else:
-                click.echo(f"no todo with index {index}")
-
+        indexes_to_remove = filter_indexes(todos, indexes)
         todos.remove_todos(indexes_to_remove)
         click.echo(f"deleted todos: {[i+1 for i in indexes_to_remove]}")
 
 
-@todo_cli.command(help="set todo as urgent")
+@todo_cli.command(help="toggle todo as urgent")
 @click.argument("indexes", nargs=-1, type=click.INT)
 def urgent(indexes: List[int]):
     with todos_operation() as todos:
-        indexes_to_set = [i - 1 for i in indexes if i - 1 < len(todos)]
+        indexes_to_set = filter_indexes(todos, indexes)
         for index in indexes_to_set:
-            todos[index].urgent = True
+            todos[index].toggle_urgent()
+
+
+@todo_cli.command(help="toggle todo as current")
+@click.argument("indexes", nargs=-1, type=click.INT)
+def current(indexes: List[int]):
+    with todos_operation() as todos:
+        indexes_to_set = filter_indexes(todos, indexes)
+        for index in indexes_to_set:
+            todos[index].toggle_current()
 
 
 @contextlib.contextmanager
@@ -66,9 +68,10 @@ def todos_operation():
 def print_todos(todos: Todos):
     if todos:
         for index, todo in enumerate(todos, 1):
-            if todo.urgent:
-                click.secho(f"{index}. {todo.content}", fg="red")
-            else:
-                click.echo(f"{index}. {todo.content}")
+            click.secho(f"{index}. {todo.content}", fg=todo.get_color())
     else:
         click.echo("No todos found")
+
+
+def filter_indexes(todos: Todos, indexes: List[int]):
+    return [i - 1 for i in indexes if i - 1 < len(todos)]
