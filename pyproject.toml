@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "antodo"
-version = "0.3.2"
+version = "0.4.0"
 description = "another todo app"
 authors = ["Chabatarovich Mikita <mikita.chabatarovich@gmail.com>"]
 classifiers = [
