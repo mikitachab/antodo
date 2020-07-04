@@ -60,9 +60,14 @@ def current(indexes: List[int]):
 @contextlib.contextmanager
 def todos_operation():
     todos = Todos()
-    yield todos
-    todos.save()
-    print_todos(todos)
+    try:
+        yield todos
+    except Exception as err:
+        raise click.ClickException(str(err))
+    else:
+        todos.save()
+    finally:
+        print_todos(todos)
 
 
 def print_todos(todos: Todos):
