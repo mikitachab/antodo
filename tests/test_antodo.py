@@ -85,6 +85,17 @@ def test_add_todo_as_urgent(todo_invoke, get_todos):
     assert todos[1].urgent is False
 
 
+def test_set_todo_as_current(todo_invoke, get_todos):
+    todo_invoke(["add", "some task"])
+    todo_invoke(["add", "another task"])
+    todo_invoke(["current", "1"])
+
+    todos = get_todos()
+
+    assert todos[0].current is True
+    assert todos[1].current is False
+
+
 def test_set_todos_as_urgent(todo_invoke, add_todo, get_todos):
     add_todo("todo 1")
     add_todo("todo 2")
