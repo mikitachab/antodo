@@ -16,7 +16,10 @@ def todo_cli():
 @todo_cli.command(help="show current todos")
 def show():
     todos = Todos()
-    print_todos(todos)
+    if todos:
+        todos.show()
+    else:
+        click.echo("No todos found")
 
 
 @todo_cli.command(help="add todo")
@@ -67,15 +70,7 @@ def todos_operation():
     else:
         todos.save()
     finally:
-        print_todos(todos)
-
-
-def print_todos(todos: Todos):
-    if todos:
-        for index, todo in enumerate(todos, 1):
-            click.secho(f"{index}. {todo.content}", fg=todo.get_color())
-    else:
-        click.echo("No todos found")
+        todos.show()
 
 
 def filter_indexes(todos: Todos, indexes: List[int]):

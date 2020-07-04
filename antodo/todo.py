@@ -4,6 +4,7 @@ import os
 import json
 from typing import List, Optional
 
+import click
 import safer
 
 import antodo.config as c
@@ -48,6 +49,10 @@ class Todos:
 
     def to_json(self):
         return list(map(lambda todo: asdict(todo), self._todos))
+
+    def show(self):
+        for index, todo in enumerate(self._todos, 1):
+            click.secho(f"{index}. {todo.content}", fg=todo.get_color())
 
     def __getitem__(self, index):
         return self._todos[index]
