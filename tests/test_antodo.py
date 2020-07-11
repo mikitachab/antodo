@@ -115,3 +115,16 @@ def test_cant_add_empty_todo(todo_invoke):
 
     assert result.exit_code == 2
     assert "cant add empty todo" in result.output
+
+
+def test_can_clear(todo_invoke, add_todo):
+    add_todo("todo 1")
+    add_todo("todo 2")
+    add_todo("todo 3")
+
+    clear_result = todo_invoke(["clear", "-y"])
+
+    assert clear_result.exit_code == 0
+
+    show_result = todo_invoke(["show"])
+    assert "No todos found" in show_result.output

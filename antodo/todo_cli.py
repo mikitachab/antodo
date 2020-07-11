@@ -60,6 +60,14 @@ def current(indexes: List[int]):
             todos[index].toggle_current()
 
 
+@todo_cli.command(help="clear current todos")
+@click.option("-y", "confirm", is_flag=True, help="clear without confirm promt")
+def clear(confirm: bool):
+    if confirm or click.confirm("Delete all todos?"):
+        with todos_operation() as todos:
+            todos.clear()
+
+
 @contextlib.contextmanager
 def todos_operation():
     todos = Todos()

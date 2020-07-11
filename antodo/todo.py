@@ -54,6 +54,9 @@ class Todos:
         for index, todo in enumerate(self._todos, 1):
             click.secho(f"{index}. {todo.content}", fg=todo.get_color())
 
+    def clear(self):
+        self._todos = []
+
     def __getitem__(self, index):
         return self._todos[index]
 
