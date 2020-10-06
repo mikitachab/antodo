@@ -60,6 +60,9 @@ class Todos:
     def __getitem__(self, index):
         return self._todos[index]
 
+    def __setitem__(self, index, value):
+        self._todos[index] = value
+
     def __bool__(self):
         return bool(self._todos)
 

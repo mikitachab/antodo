@@ -4,6 +4,7 @@ from typing import List
 import click
 
 from antodo.todo import Todos
+from antodo.todo_editor import TodoEditor
 from . import __version__
 
 
@@ -66,6 +67,19 @@ def clear(confirm: bool):
     if confirm or click.confirm("Delete all todos?"):
         with todos_operation() as todos:
             todos.clear()
+
+
+@todo_cli.command(help="clear current todos")
+@click.argument("index", type=click.INT)
+def edit(index: int):
+    with todos_operation() as todos:
+        todo = todos[index - 1]
+
+        editor = TodoEditor(todo)
+        new_content = editor.get_new_todo_content()
+        todo.content = new_content
+
+        todos[index - 1] = todo
 
 
 @contextlib.contextmanager
