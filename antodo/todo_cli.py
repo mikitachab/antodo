@@ -69,7 +69,7 @@ def clear(confirm: bool):
             todos.clear()
 
 
-@todo_cli.command(help="clear current todos")
+@todo_cli.command(help="edit todo")
 @click.argument("index", type=click.INT)
 def edit(index: int):
     with todos_operation() as todos:
@@ -82,7 +82,7 @@ def edit(index: int):
         todos[index - 1] = todo
 
 
-@todo_cli.command(help="clear current todos")
+@todo_cli.command(help="add sub taks")
 @click.argument("index", type=click.INT)
 @click.argument("content", nargs=-1, type=click.STRING)
 def add_sub(index: int, content: List[str]):
@@ -92,7 +92,7 @@ def add_sub(index: int, content: List[str]):
         todo.add_sabtask(content_str)
 
 
-@todo_cli.command(help="clear current todos")
+@todo_cli.command(help="remove sub task")
 @click.argument("todo_index", type=click.INT)
 @click.argument("sub_index", type=click.INT)
 def remove_sub(todo_index: int, sub_index: int):
