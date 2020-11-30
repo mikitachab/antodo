@@ -1,5 +1,6 @@
 from dataclasses import asdict
 from dataclasses import dataclass
+from dataclasses import field
 import os
 import json
 from typing import List, Optional
@@ -15,9 +16,16 @@ class Todo:
     content: str
     urgent: bool
     current: Optional[bool] = False
+    subtasks: List[str] = field(default_factory=list)
 
     def __str__(self) -> str:
         return self.content
+
+    def add_sabtask(self, content: str):
+        self.subtasks.append(content)
+
+    def remove_subtask(self, sub_index: int):
+        self.subtasks.pop(sub_index)
 
     def toggle_urgent(self):
         self.urgent = not self.urgent
@@ -53,6 +61,9 @@ class Todos:
     def show(self):
         for index, todo in enumerate(self._todos, 1):
             click.secho(f"{index}. {todo.content}", fg=todo.get_color())
+            if todo.subtasks:
+                for i, task in enumerate(todo.subtasks):
+                    click.echo(f"\t{i+1} {task}")
 
     def clear(self):
         self._todos = []

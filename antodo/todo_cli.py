@@ -82,6 +82,25 @@ def edit(index: int):
         todos[index - 1] = todo
 
 
+@todo_cli.command(help="clear current todos")
+@click.argument("index", type=click.INT)
+@click.argument("content", nargs=-1, type=click.STRING)
+def add_sub(index: int, content: List[str]):
+    content_str: str = " ".join(content)
+    with todos_operation() as todos:
+        todo = todos[index - 1]
+        todo.add_sabtask(content_str)
+
+
+@todo_cli.command(help="clear current todos")
+@click.argument("todo_index", type=click.INT)
+@click.argument("sub_index", type=click.INT)
+def remove_sub(todo_index: int, sub_index: int):
+    with todos_operation() as todos:
+        todo = todos[todo_index - 1]
+        todo.remove_subtask(sub_index - 1)
+
+
 @contextlib.contextmanager
 def todos_operation():
     todos = Todos()
