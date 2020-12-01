@@ -3,8 +3,7 @@ from typing import List
 
 import click
 
-from antodo.todo import Todos
-from antodo.todo_editor import TodoEditor
+import antodo
 from . import __version__
 
 
@@ -16,7 +15,7 @@ def todo_cli():
 
 @todo_cli.command(help="show current todos")
 def show():
-    todos = Todos()
+    todos = antodo.Todos()
     if todos:
         todos.show()
     else:
@@ -75,7 +74,7 @@ def edit(index: int):
     with todos_operation() as todos:
         todo = todos[index - 1]
 
-        editor = TodoEditor(todo)
+        editor = antodo.TodoEditor(todo)
         new_content = editor.get_new_todo_content()
         todo.content = new_content
 
@@ -103,7 +102,7 @@ def remove_sub(todo_index: int, sub_index: int):
 
 @contextlib.contextmanager
 def todos_operation():
-    todos = Todos()
+    todos = antodo.Todos()
     try:
         yield todos
     except Exception as err:
@@ -114,5 +113,5 @@ def todos_operation():
         todos.show()
 
 
-def filter_indexes(todos: Todos, indexes: List[int]):
+def filter_indexes(todos: antodo.Todos, indexes: List[int]):
     return [i - 1 for i in indexes if i - 1 < len(todos)]

@@ -6,7 +6,7 @@ import pytest
 
 from antodo import todo_cli
 from antodo import config
-from antodo.todo import Todos
+from antodo.todos import Todos
 
 
 @pytest.fixture
