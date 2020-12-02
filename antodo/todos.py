@@ -1,7 +1,5 @@
 from dataclasses import asdict
 
-import click
-
 import antodo
 
 
@@ -26,10 +24,7 @@ class Todos:
 
     def show(self):
         for index, todo in enumerate(self._todos, 1):
-            click.secho(f"{index}. {todo.content}", fg=todo.get_color())
-            if todo.subtasks:
-                for i, task in enumerate(todo.subtasks):
-                    click.echo(f"\t{i+1} {task}")
+            todo.show(index)
 
     def clear(self):
         self._todos = []
