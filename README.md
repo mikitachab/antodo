@@ -43,10 +43,3 @@ set todo as urgent by index based on todos order
 ```shell
 antodo urgent 3
 ```
-
-## Features
-
-- [x] basic todo add/remove/list
-- [x] set todo as urgent
-- [ ] set timer for todo with deskop notification
-- [ ] todo tags

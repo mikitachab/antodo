@@ -78,7 +78,17 @@ def edit(index: int):
         new_content = editor.get_new_todo_content()
         todo.content = new_content
 
-        todos[index - 1] = todo
+
+@todo_cli.command(help="edit todo")
+@click.argument("todo_index", type=click.INT)
+@click.argument("sub_index", type=click.INT)
+def edit_sub(todo_index: int, sub_index: int):
+    with todos_operation() as todos:
+        todo = todos[todo_index - 1]
+
+        editor = antodo.TodoEditor(todo)
+        new_content = editor.get_new_todo_subtask_content(sub_index - 1)
+        todo.subtasks[sub_index - 1] = new_content
 
 
 @todo_cli.command(help="add sub taks")
