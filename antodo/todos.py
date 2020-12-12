@@ -1,4 +1,5 @@
 from dataclasses import asdict
+from typing import List
 
 import antodo
 
@@ -6,7 +7,7 @@ import antodo
 class Todos:
     def __init__(self):
         self._loader = antodo.TodosLoader()
-        self._todos: list = self._loader.load_todos()
+        self._todos: List[antodo.Todo] = self._loader.load_todos()
 
     def add_todo(self, content: str, urgent: bool):
         self._todos.append(antodo.Todo(content, urgent))

@@ -4,8 +4,8 @@ import json
 from click.testing import CliRunner
 import pytest
 
+import antodo
 from antodo import todo_cli
-from antodo import config
 from antodo.todos import Todos
 
 
@@ -27,16 +27,13 @@ def todo_invoke(cli_runner, todo):
 @pytest.fixture(autouse=True)
 def todos_json_path(monkeypatch, tmp_path):
     todos_path = str(tmp_path / "todos.json")
-    with open(todos_path, "w") as file:
-        json.dump({"todos": []}, file)
-    monkeypatch.setattr(config, "TODOS_JSON_PATH", todos_path)
+    monkeypatch.setattr(antodo.config, "TODOS_JSON_PATH", todos_path)
 
 
 @pytest.fixture
 def add_todo(todos_json_path):
-    todos = Todos()
-
     def _add_todo(content, urgent=False):
+        todos = Todos()
         todos.add_todo(content, urgent)
         todos.save()
 
