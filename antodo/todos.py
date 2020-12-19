@@ -12,7 +12,7 @@ class Todos:
     def add_todo(self, content: str, urgent: bool):
         self._todos.append(antodo.Todo(content, urgent))
 
-    def remove_todos(self, indexes_to_remove):
+    def remove_todos(self, indexes_to_remove: List[int]):
         self._todos = [
             todo for index, todo in enumerate(self._todos) if index not in indexes_to_remove
         ]
@@ -29,6 +29,9 @@ class Todos:
 
     def clear(self):
         self._todos = []
+
+    def sort(self):
+        self._todos.sort(key=lambda x: x.content.lower())
 
     def __getitem__(self, index):
         return self._todos[index]

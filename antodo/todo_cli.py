@@ -110,6 +110,12 @@ def remove_sub(todo_index: int, sub_index: int):
         todo.remove_subtask(sub_index - 1)
 
 
+@todo_cli.command(help="sort todos alphabetically")
+def sort():
+    with todos_operation() as todos:
+        todos.sort()
+
+
 @contextlib.contextmanager
 def todos_operation():
     todos = antodo.Todos()
