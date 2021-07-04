@@ -37,7 +37,7 @@ def add(content: List[str], urgent: bool):
 @click.argument("indexes", nargs=-1, type=click.INT)
 def remove(indexes: List[int]):
     with todos_operation() as todos:
-        indexes_to_remove = filter_indexes(todos, indexes)
+        indexes_to_remove = todos.filter_valid_indexes(indexes)
         todos.remove_todos(indexes_to_remove)
         click.echo(f"deleted todos: {[i+1 for i in indexes_to_remove]}")
 
@@ -46,7 +46,7 @@ def remove(indexes: List[int]):
 @click.argument("indexes", nargs=-1, type=click.INT)
 def urgent(indexes: List[int]):
     with todos_operation() as todos:
-        indexes_to_set = filter_indexes(todos, indexes)
+        indexes_to_set = todos.filter_valid_indexes(indexes)
         for index in indexes_to_set:
             todos[index].toggle_urgent()
 
@@ -55,7 +55,7 @@ def urgent(indexes: List[int]):
 @click.argument("indexes", nargs=-1, type=click.INT)
 def current(indexes: List[int]):
     with todos_operation() as todos:
-        indexes_to_set = filter_indexes(todos, indexes)
+        indexes_to_set = todos.filter_valid_indexes(indexes)
         for index in indexes_to_set:
             todos[index].toggle_current()
 
@@ -127,7 +127,3 @@ def todos_operation():
         todos.save()
     finally:
         todos.show()
-
-
-def filter_indexes(todos: antodo.Todos, indexes: List[int]):
-    return [i - 1 for i in indexes if i - 1 < len(todos)]

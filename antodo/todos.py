@@ -33,6 +33,9 @@ class Todos:
     def sort(self):
         self._todos.sort(key=lambda x: x.content.lower())
 
+    def filter_valid_indexes(self, indexes: List[int]):
+        return [i - 1 for i in indexes if i - 1 < len(self)]
+
     def __getitem__(self, index):
         return self._todos[index]
 
