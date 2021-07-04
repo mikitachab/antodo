@@ -47,8 +47,19 @@ def test_remove_todo(todo_invoke, add_todo):
     result = todo_invoke(["remove", "1"])
 
     assert result.exit_code == 0
-    assert "1. some task" not in result.output
-    assert "1. second task" in result.output
+    assert "Deleted todos:\n1. some task" in result.output
+    assert "Todos:\n1. second task" in result.output
+
+
+def test_remove_todos(todo_invoke, add_todo):
+    add_todo("todo 1")
+    add_todo("todo 2")
+    add_todo("todo 3")
+
+    result = todo_invoke(["remove", "1", "3"])
+
+    assert "Deleted todos:\n1. todo 1\n3. todo 3" in result.output
+    assert "1. todo 2" in result.output
 
 
 def test_remove_all(todo_invoke, add_todo):
@@ -62,18 +73,6 @@ def test_remove_all(todo_invoke, add_todo):
     show_result = todo_invoke(["show"])
 
     assert "No todos found" in show_result.output
-
-
-def test_remove_todos(todo_invoke, add_todo):
-    add_todo("todo 1")
-    add_todo("todo 2")
-    add_todo("todo 3")
-
-    result = todo_invoke(["remove", "1", "3"])
-
-    assert "deleted todos: [1, 3]" in result.output
-    assert "1. todo 2" in result.output
-
 
 def test_add_todo_as_urgent(todo_invoke, get_todos):
     todo_invoke(["add", "-u", "some task"])

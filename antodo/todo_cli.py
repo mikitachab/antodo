@@ -38,8 +38,11 @@ def add(content: List[str], urgent: bool):
 def remove(indexes: List[int]):
     with todos_operation() as todos:
         indexes_to_remove = todos.filter_valid_indexes(indexes)
+        todos_to_remove = [todos[i] for i in indexes_to_remove]
         todos.remove_todos(indexes_to_remove)
-        click.echo(f"deleted todos: {[i+1 for i in indexes_to_remove]}")
+        click.echo("Deleted todos:")
+        for i, removed_todo in zip(indexes_to_remove, todos_to_remove):
+            removed_todo.show(i + 1)
 
 
 @todo_cli.command(help="toggle todo as urgent")
@@ -126,4 +129,5 @@ def todos_operation():
     else:
         todos.save()
     finally:
+        click.echo("Todos:")
         todos.show()
